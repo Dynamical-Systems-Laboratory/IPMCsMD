@@ -1,0 +1,50 @@
+#!/usr/bin/env emc_setup.pl
+
+# Options
+
+ITEM		OPTIONS
+
+project		dpd
+units		real
+field		dpd/general
+auto		true
+ntotal		7910
+density 	g/cc
+density		0.1	
+mass 		true
+replace		true
+build_dir	.
+
+ITEM		END
+
+# Groups
+
+ITEM		GROUPS
+
+ngroup *C(F)(F)C(F)(F)*, 1,ngroup:2
+# Connect on first and second C
+mgroup *C(F)(F)C(F)*[Oc]C(F)(F)C(F)(C(F)(F)F)[Oc]C(F)(F)C(F)(F)S(=[Os])(=[Os])[[Os]-][Na+], 1,ngroup:2, 2,ngroup:1
+tgroup *F, 1,ngroup:1, 1,mgroup:2
+
+water HOH	
+
+ITEM		END
+
+# Clusters
+
+ITEM		CLUSTERS
+
+poly	block	82353.7848
+water	water	54480.42900	
+
+ITEM		END
+
+# Polymers
+
+ITEM		POLYMERS
+
+poly
+1	ngroup,7,mgroup,1,ngroup,7,mgroup,1,ngroup,7,mgroup,1,ngroup,7,mgroup,1,ngroup,7,mgroup,1,ngroup,7,mgroup,1,ngroup,7,mgroup,1,ngroup,7,mgroup,1,ngroup,7,mgroup,1,ngroup,7,mgroup,1,tgroup,2
+
+ITEM		END
+
