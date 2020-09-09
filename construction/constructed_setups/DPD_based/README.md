@@ -1,13 +1,14 @@
 # Construction of Nafion membrane
-====== 
 
 ## EMC part
 
 The membrane is first constructed using the discrete particle dynamics (DPD) functionality of the [EMC software](http://montecarlo.sourceforge.net/emc/Welcome.html). Constructions involves several steps:
 
 1. Change the default DPD parameters
-..* The parameters are located in field/dpd/ directory of EMC
-..* In `general.prm` change the `MASS` from
+
+* The parameters are located in field/dpd/ directory of EMC
+
+* In `general.prm` change the `MASS` from
 ```
 ITEM    MASS
 
