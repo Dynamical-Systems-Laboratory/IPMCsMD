@@ -6,9 +6,10 @@ The membrane is first constructed using the discrete particle dynamics (DPD) fun
 
 1. Change the default DPD parameters
 
-  * The parameters are located in field/dpd/ directory of EMC
+  * The parameters are located in `field/dpd/` directory of EMC
 
   * In `general.prm` change the `MASS` from
+
 ```
 ITEM    MASS
 
@@ -19,7 +20,7 @@ ITEM    MASS
 ITEM    END
 
 ```
-    to 
+to 
 
 ```
 ITEM    MASS
@@ -50,6 +51,8 @@ ITEM    END
 ```
 # Dihedral wildcard parameters
 
+ITEM	TORSION_AUTO
+
 # type1 type2   type3   k   theta0
 
 *   *   *   * 0 0 0 0
@@ -58,10 +61,10 @@ ITEM    END
 ```
 
 2. Copy the `polymer.sh` template from `construction/parameters/dpd_templates/`
-   * This file determines the structure and connectivity of the polymer chain so anything related to it should be changed here
+  * This file determines the structure and connectivity of the polymer chain so anything related to it should be changed here
 3. Run `/.../scripts/emc_setup.pl polymer.sh`
 4. This will create a file `build.emc`. Using `build.emc` from `construction/parameters/dpd_templates/` as a syntax guide:
-   * Substitute all the partial charges to their correct values. Right now the full entry is:
+  * Substitute all the partial charges to their correct values. Right now the full entry is:
 
 ```
 
@@ -122,4 +125,8 @@ Masses
 
 This step can be done before or after Step 2.
 
-All the correct parameters are in the `construction/parameters/` directory, including the output from [LigParGen](http://zarbi.chem.yale.edu/ligpargen/).  
+All the correct parameters are in the `construction/parameters/` directory, including the output from [LigParGen](http://zarbi.chem.yale.edu/ligpargen/).
+
+There needs to be a space between `Masses` and entries and then entries and the `Atoms` section. Rules for LAMMPS input files format are specified [here](https://lammps.sandia.gov/doc/2001/data_format.html). 
+
+ 

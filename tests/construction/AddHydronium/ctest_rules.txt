@@ -1,0 +1,30 @@
+#
+# Partial charge conversion rules for conversion testing
+#
+
+# Bonds are artificially adjusted for testing, not to use
+# for actual physical cases
+
+# Set 1
+
+o=,s#o=,s#c,s#cl,s	 1.27870000  	# S in -C-SO3- 
+o=,s			-0.57650000	# O in -SO3-
+cl,s 			-0.57650000	# O in -SO3-
+
+# Set 2
+c,f#c,f#c,f#c,s		 0.34600000	# C in -CF3
+c,f#c,f#c,f#c,s//c,f	-0.09890000	# F in the above group
+c,c#c,c#c,f#c,f		 0.16000000	# C in -C-CF2-C- group
+c,c#c,c#c,f#c,f//c,f	-0.080000000	# F in the above group
+
+# and ether group
+c,oc#c,oc		-0.317	        # O in the ether group
+
+# Water (LAMMPS - TIP4P water model)
+
+hw,o*#hw,o*		-0.8476		# O in water
+hw,o*			 0.4238		# H in water
+
+# Hydronium ion
+oh*	-0.248 # O in H3O+
+hhw 0.416	# H in H3O+
