@@ -189,7 +189,7 @@ if __name__ == '__main__':
     # .data file structure tests
     #
    
-    section_names = ['Masses', 'Atoms', 'Bonds', 'Angles', 'Dihedrals', 'Impropers']
+    section_names = ['Masses', 'Atoms', 'Bonds', 'Angles', 'Dihedrals']
     data_struct = FileStructure(lmp_data_file, section_names)
 
     print(data_struct.check_atoms_pos())

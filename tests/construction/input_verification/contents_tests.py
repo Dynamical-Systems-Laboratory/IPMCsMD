@@ -54,7 +54,7 @@ class InteractionCheck(BaseCheck):
 	def __init__(self, data_file, params_file, type_map={}):
 		# data_file, params_file - LAMMPS .data and .params
 		# files respectively 
-		BaseCheck.__init__(self, data_file, params_file, type_map) 
+		BaseCheck.__init__(self, data_file, params_file, type_map)
 
 	def correct_interaction_type(self, data_name, params_name):
 		''' Compare tags and IDs in .param and .data files for given 
@@ -93,8 +93,6 @@ class InteractionCheck(BaseCheck):
 				tag = tuple(' '.join(line[ind:]).strip().split(','))
 			# Now compare the tags and IDs
 			if not (params[tag] == int(line[1])):
-				print(params[tag], int(line[1]))
-				print(line)
 				return False
 
 		return True
@@ -137,6 +135,36 @@ class InteractionCheck(BaseCheck):
 					return False
 
 		return True
+
+	def removed_spurious_interactions(self, data_name, sp_type):
+		''' Check if no sp_type species are present in given interaction '''
+
+		# data_name - name of the .data file section e.g. Bonds, Angles
+		# sp_type - type name (string name as defined in Masses, e.g. Na)
+		# Returns True if sp_type not present in any interaction 
+
+		# Get the target .data section
+		with open(self.data_file, 'r') as fin:
+			data = ed.extract_data_section(fin, data_name)
+
+		for line in data:
+			line = line.strip().split()
+			
+			# Find the begining of atom tag list 
+			# Take the n entries
+			atom_ind = line.index('#') + 1
+
+			# Check each atom - ind serves to 
+			# simultaneously navigate through atom IDs
+			atom_list = line[atom_ind:]
+
+			# False if interaction includes the spurious type 
+			if str(sp_type) in atom_list:
+				return False
+
+		return True
+
+
 
 class AtomsCheck(BaseCheck):
 	''' Class for verifying correctness of Atoms

@@ -39,14 +39,17 @@ int_check = contst.InteractionCheck(lmp_data_file, lmp_params_file, type_map)
 # Bonds
 utils.test_pass(int_check.correct_interaction_type('Bonds', 'bond_coeff'), 'Bond types')
 utils.test_pass(int_check.correct_interaction_components('Bonds'), 'Bond constituents')
+utils.test_pass(int_check.removed_spurious_interactions('Bonds', 'Na'), 'No Na+ bonds')
 
 # Angles
 utils.test_pass(int_check.correct_interaction_type('Angles', 'angle_coeff'), 'Angle type')
 utils.test_pass(int_check.correct_interaction_components('Angles'), 'Angle constituents')
+utils.test_pass(int_check.removed_spurious_interactions('Angles', 'Na'), 'No Na+ angles')
 
 # Dihedrals
 utils.test_pass(int_check.correct_interaction_type('Dihedrals', 'dihedral_coeff'), 'Dihedral type')
 utils.test_pass(int_check.correct_interaction_components('Dihedral'), 'Dihedral constituents')
+utils.test_pass(int_check.removed_spurious_interactions('Dihedrals', 'Na'), 'No Na+ dihedrals')
 
 #
 # .data file structure tests
