@@ -24,15 +24,19 @@ import extract_data as ed
 class BaseCheck:
 	''' Base class for .data file conceptual verifications '''
 	 
-	def __init__(self, data_file, params_file):
+	def __init__(self, data_file, params_file, type_map):
 		''' Creates a dict of atom tags : atom IDs '''
 			
 		# data_file, params_file - LAMMPS .data and .params
 		# files respectively
-		
+		# type_map - conversion rules for atom types that have 
+		#		multiple represenations (like Os and o=)
+		# Currently converting only parameters file
+
 		self.data_file = data_file
 		self.params_file = params_file
-		
+		self.type_map = type_map
+
 		self.atom_IDs = {}
 		# Get the data from Masses section
 		with open(self.data_file, 'r') as fin:
@@ -47,10 +51,10 @@ class BaseCheck:
 class InteractionCheck(BaseCheck):
 	''' Class for interaction tests '''
 
-	def __init__(self, data_file, params_file):
+	def __init__(self, data_file, params_file, type_map={}):
 		# data_file, params_file - LAMMPS .data and .params
 		# files respectively 
-		BaseCheck.__init__(self, data_file, params_file) 
+		BaseCheck.__init__(self, data_file, params_file, type_map) 
 
 	def correct_interaction_type(self, data_name, params_name):
 		''' Compare tags and IDs in .param and .data files for given 
@@ -79,10 +83,18 @@ class InteractionCheck(BaseCheck):
 
 			# Find the begining of atom list 
 			ind = line.index('#') + 1
-			# The prepare the tag to be just a list of atoms
-			tag = tuple(' '.join(line[ind:]).strip().split(','))
+			
+			if self.type_map:
+				atoms = line[ind:][0].strip().split(',')
+				atoms = [self.type_map[x] for x in atoms]  
+				tag = tuple(atoms)
+			else:
+				# The prepare the tag to be just a list of atoms
+				tag = tuple(' '.join(line[ind:]).strip().split(','))
 			# Now compare the tags and IDs
 			if not (params[tag] == int(line[1])):
+				print(params[tag], int(line[1]))
+				print(line)
 				return False
 
 		return True
@@ -130,12 +142,12 @@ class AtomsCheck(BaseCheck):
 	''' Class for verifying correctness of Atoms
 			section in LAMMPS .data file '''
 	
-	def __init__(self, data_file, params_file):
+	def __init__(self, data_file, params_file, type_map={}):
 		''' Loads Atoms section from the .data file ''' 
 		
 		# data_file, params_file - LAMMPS .data and .params file
 
-		BaseCheck.__init__(self, data_file, params_file)
+		BaseCheck.__init__(self, data_file, params_file, type_map)
 
 		with open(self.data_file, 'r') as fin:
 			self.atoms = ed.extract_data_section(fin, 'Atoms')
@@ -154,6 +166,9 @@ class AtomsCheck(BaseCheck):
 			# Atom tag
 			atom_tag = line[-1]
 			
+			if self.type_map:
+				atom_tag = self.type_map[atom_tag]
+
 			# Comparison
 			if not (self.atom_IDs[atom_tag] == line[2]):
 				return False

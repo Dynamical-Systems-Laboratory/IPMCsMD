@@ -105,9 +105,11 @@ The DPD output needs to be converted to a valid LAMMPS input through the followi
 
 1. Copy the `dpd.data` into the final directory where system information should be stored
 
-2. Copy the `dpd_example.py` from `/construction/example_scripts/`, rename, change paths etc.; Then just run - this will move columns in the `dpd.data` so that they are in order expected by LAMMPS. It will also exclude any spurious interactions of the counterion. 
+2. Copy the `dpd.params` into the final directory where system information should be stored
 
-3. Substitute correct masses from `construction/parameters/dpd_templates/dpd.data`. This is example for sodium:
+3. Copy the `dpd_example.py` from `/construction/example_scripts/`, rename, change paths etc.; Then just run - this will move columns in the `dpd.data` so that they are in order expected by LAMMPS. It will also exclude any spurious interactions of the counterion. 
+
+4. Substitute correct masses from `construction/parameters/dpd_templates/dpd.data`. This is example for sodium (**The masses are not necessarily in correct order so check**):
 
 ```
 Masses
@@ -123,10 +125,12 @@ Masses
 
 ```
 
-This step can be done before or after Step 2.
+This step can be done at any time, before Step 3 as well.
 
-All the correct parameters are in the `construction/parameters/` directory, including the output from [LigParGen](http://zarbi.chem.yale.edu/ligpargen/).
+All the correct parameters are in the `construction/parameters/dpd_templates/` directory, including the output from [LigParGen](http://zarbi.chem.yale.edu/ligpargen/).
 
 There needs to be a space between `Masses` and entries and then entries and the `Atoms` section. Rules for LAMMPS input files format are specified [here](https://lammps.sandia.gov/doc/2001/data_format.html). 
+
+To verify if the input is correct, run `input_check.py` (or a collective version for all seeds `test_all_seeds.sh`). Example of how to run it for the current model is located in the directory `construction/constructed_setups/DPD_based/sodium_models/example`.
 
  

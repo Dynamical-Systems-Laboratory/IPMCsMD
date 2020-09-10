@@ -1,0 +1,62 @@
+
+# File containing all necessary potential information for simulation 
+# of Nafion with the OPLS-AA force field
+#
+# Potential values generated with LigParGen
+#
+# Water model for now is SPC https://lammps.sandia.gov/doc/Howto_spc.html
+#
+
+# Pair Coeffs
+
+pair_coeff	 1  1    0.066		3.5000000  # c,c
+pair_coeff	 2  2    0.060 	 	2.9000000  # f,f
+pair_coeff	 3  3    0.140  	2.9000000  # oc,oc
+pair_coeff	 4  4    0.250  	3.5500000  # s,s
+pair_coeff	 5  5    0.170  	2.9600000  # o=,o=
+pair_coeff 	 6  6    0.002772	3.35	   # na+, na+ 
+pair_coeff	 7  7    0.0        0.95720	   # hw,hw
+pair_coeff	 8  8    0.15540    3.16557    # o*,o*
+
+# Bond Coeffs
+ 
+bond_coeff	1 		268.0000     1.5290    # c,c
+bond_coeff	2		367.0000     1.3600    # c,f
+bond_coeff	3    	320.0000     1.4100    # c,oc
+bond_coeff	4     	340.0000     1.7700    # c,s
+bond_coeff	5    	700.0000     1.4400    # s,o=
+bond_coeff	6  		0.0000       1.4400    # o, Na
+bond_coeff  7 		1000.00      1.0       # o*,hw	
+
+# Angle Coeffs
+
+angle_coeff	 1		58.350    112.700    # c,c,c
+angle_coeff	 2  	50.000    109.500    # c,c,f
+angle_coeff	 3  	50.000    109.500    # c,c,oc
+angle_coeff	 4   	50.000    114.700    # c,c,s
+angle_coeff	 5    	50.000    109.500    # c,oc,c
+angle_coeff	 6    	74.000    108.900    # c,s,o=
+angle_coeff	 7    	77.000    109.100    # f,c,f
+angle_coeff	 8    	51.650    110.580    # f,c,oc
+angle_coeff	 9   	50.000    109.500    # f,c,s
+angle_coeff	10    	0.000     119.000    # s, o=, na
+angle_coeff	11    	104.000   119.000    # o=,s,o=
+angle_coeff	12    	100.0	  109.5	     # hw,o*,hw
+
+# Dihedral Coeffs
+
+dihedral_coeff	 1      0.000      7.250      0.000      0.000     # c,c,c,c
+dihedral_coeff	 2 		0.000      0.000      0.000      0.000     # c,c,c,f
+dihedral_coeff	 3      1.711     -0.500      0.663      0.000     # c,c,c,oc
+dihedral_coeff	 4      0.650     -0.250      0.670      0.000	   # c,c,oc,c
+dihedral_coeff	 5      0.000      0.000      0.000      0.000     # c,c,s,o=
+dihedral_coeff	 6      0.000      5.124      0.000      0.000     # c,oc,c,f
+dihedral_coeff	 7      0.000      0.000      0.000      0.000     # c,s,o, Na
+dihedral_coeff	 8     -2.500      0.000      0.250      0.000     # f,c,c,f
+dihedral_coeff	 9      0.000      0.000      0.540      0.000     # f,c,c,oc
+dihedral_coeff	10    	0.000      0.450      0.000      0.000     # f,c,c,s
+dihedral_coeff	11      0.000      0.000      0.000      0.000	   # f,c,s,o=
+dihedral_coeff	12     -0.550      0.000      0.000      0.000	   # oc,c,c,oc
+dihedral_coeff	13      0.000      2.170      0.000      0.000 	   # oc,c,c,s
+dihedral_coeff	14    0.00000    0.00000    0.00000    0.00000     # O,S,O,Na
+

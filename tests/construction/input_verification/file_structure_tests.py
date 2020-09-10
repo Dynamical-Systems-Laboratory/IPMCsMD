@@ -57,7 +57,7 @@ class FileStructure:
         ''' True if number of atoms is on line 3
                 and number of atom types on line 9 '''
         
-        if 'atoms' in self.data[2] and 'atom types' in self.data[8]:
+        if 'atoms' in self.data[2] and 'atom types' in self.data[7]:
             return True
         else:
             return False
