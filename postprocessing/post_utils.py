@@ -11,8 +11,19 @@ py_path = './io_operations/'
 sys.path.insert(0, py_path)
 
 import extract_data_file as dataf 
+from colors import *
 import math
 
+def msg(text, clr):
+	''' Print text with color defined as clr and style font '''
+	print(clr + text + RESET)
+
+def float_equality(num1, num2, tol):
+	''' Compare two floating point numbers for approximate equality '''
+	
+	max_num = max([1.0, abs(num1), abs(num2)])
+	return abs(num1 - num2) <= tol*max_num
+		
 def conv_to_float(data):
 	''' Convert single string data into a nested list of floats '''
 	

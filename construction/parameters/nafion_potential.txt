@@ -30,7 +30,7 @@ bond_coeff	1 		268.0000     1.5290    # c,c
 bond_coeff	2		367.0000     1.3600    # c,f
 bond_coeff	3    	320.0000     1.4100    # c,oc
 bond_coeff	4     	340.0000     1.7700    # c,s
-bond_coeff	5    	700.0000     1.4400    # s,o=
+bond_coeff	5    	700.0000     1.4400    # o=,s
 bond_coeff	6  		700.0000     1.4400    # s,cl
 bond_coeff  7 		600.00       1.0       # o*,hw	
 bond_coeff  8 		600.00       0.973     # oh*,hhw
