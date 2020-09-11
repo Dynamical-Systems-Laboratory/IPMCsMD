@@ -90,7 +90,7 @@ def compute_spatial_stress(fname, time, nbins, idir, wpos=[], all_steps=False, a
 			# So that the binning is simple 
 			# Shifted the interval to 0->L_tot
 			norm_pos = float(at[d_ind]) - L_0
-			ind = math.floor(norm_pos/bin_width)
+			ind = max(min(math.floor(norm_pos/bin_width), nbins-1),0)
 			atoms_in_bins[ind] += 1
 			for key, col in zip(directions, columns):
 				temp_stress[key][ind] += float(at[col])

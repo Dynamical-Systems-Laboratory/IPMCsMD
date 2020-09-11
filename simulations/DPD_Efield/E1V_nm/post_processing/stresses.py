@@ -6,6 +6,7 @@ import sys
 py_path = '../../../../../postprocessing/'
 sys.path.insert(0, py_path)
 
+import glob, os
 import stress_processing as sp
 import io_module as io
 
@@ -18,6 +19,12 @@ dfile = '../efield_nafion.d'
 # Output file
 ofile = 'stresses_out_'
 pre_ofile = 'pre_stresses_out_'
+
+# Remove all old files because this code appends
+for filename in glob.glob(ofile + '*.txt'):
+	os.remove(filename)
+for filename in glob.glob(pre_ofile + '*.txt'):
+	os.remove(filename)
 
 # Stress directions
 out_file = {'xx' : ofile + 'xx.txt', 'yy' : ofile + 'yy.txt', 'zz' : ofile + 'zz.txt',

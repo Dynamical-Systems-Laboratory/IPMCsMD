@@ -6,6 +6,7 @@ import sys
 py_path = '../../../../../postprocessing/'
 sys.path.insert(0, py_path)
 
+import glob, os
 import compute_type_densities as ctd
 import io_module as io
 
@@ -18,6 +19,12 @@ dfile = '../efield_nafion.d'
 # Output files
 ofile = 'number_density_'
 pre_ofile = 'pre_number_density_'
+
+# Remove all old files because this code appends
+for filename in glob.glob(ofile + '*.txt'):
+	os.remove(filename)
+for filename in glob.glob(pre_ofile + '*.txt'):
+	os.remove(filename)
 
 # Atom types (6 - Na+, 4 - S, 8 - O in H2O)
 typeID = [6, 4, 8]

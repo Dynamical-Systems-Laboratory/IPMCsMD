@@ -14,6 +14,8 @@
 *_diff
 *.xyz
 *.d
+*.txt
+*.out
 #*.txt
 *.lammps
 *.mat

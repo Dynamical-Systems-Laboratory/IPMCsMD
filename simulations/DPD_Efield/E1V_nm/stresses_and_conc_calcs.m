@@ -1,6 +1,4 @@
-%
-% Script for computation of average RDFs and CNs
-%
+% Collect concentration and stress data
 
 % Directories to consider
 dir_names = dir('seed_*');
@@ -78,7 +76,8 @@ for i=1:ndirs
    
    cd '../../'
 end
+
 % Save data
-save('stress_conc_data');
+save('E1V_nm_stress_conc_data');
 
 

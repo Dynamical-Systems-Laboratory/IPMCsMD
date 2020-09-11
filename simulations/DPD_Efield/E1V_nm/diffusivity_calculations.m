@@ -1,47 +1,55 @@
-%
-% Script for computation of average diffusivities and plots of MSD
-%
-
-%%% Specify the file name in two places
+% Script for collecting the MSD data
 
 clear
-
-% Directories to consider
-dir_names = dir('seed_*');
-dir_names = {dir_names.name};
-ndirs = length(dir_names);
+close all
 
 % Number of data points
-npoints = 7000; 
+npoints = 6000;
+
+collect_msd('with_efield_nafion.ion_diff','E1V_nm_nafion_ion_diff', 'seed_*', npoints);
+collect_msd('with_efield_nafion.water_diff','E1V_nm_nafion_water_diff', 'seed_*', npoints);
 
 % All data
-% MSD
-msd_tot_all = zeros(ndirs,npoints);
-msd_x_all = zeros(ndirs,npoints);
-msd_y_all = zeros(ndirs,npoints);
-msd_z_all = zeros(ndirs,npoints);
-% Time 
-time_all = zeros(ndirs, npoints);
+function collect_msd(fin, fout, dirname, npoints)
+    % Collects msd data from fin, for each directory that has a common name
+    % dirname. The data needs to have npoints. Collected data is saved as
+    % a mat file.
 
-for i=1:ndirs
-   fname = dir_names(i);
-   path = sprintf('%s',fname{:});
-   % Move to path and execute the python script for averaging
-   cd(path);
-   % Load data 
-%    data = load('with_efield_nafion.water_diff');
-%    data = load('nafion.water_diff');
-    data = load('nafion.ion_diff');
-   % Store
-   time_all(i,:) = data(:,1);
-   msd_x_all(i,:) = data(:,2);
-   msd_y_all(i,:) = data(:,3);
-   msd_z_all(i,:) = data(:,4);
-   msd_tot_all(i,:) = data(:,5);
-   cd '../'
+    % Directories to consider
+    dir_names = dir(dirname);
+    dir_names = {dir_names.name};
+    ndirs = length(dir_names);
+    
+    % MSD
+    msd_tot_all = zeros(ndirs,npoints);
+    msd_x_all = zeros(ndirs,npoints);
+    msd_y_all = zeros(ndirs,npoints);
+    msd_z_all = zeros(ndirs,npoints);
+    % Time 
+    time_all = zeros(ndirs, npoints);
+
+    for i=1:ndirs
+       fname = dir_names(i);
+       path = sprintf('%s',fname{:});
+       fprintf("Processing %s\n", path)
+       % Move to path and execute the python script for averaging
+       cd(path);
+       % Load data 
+       data = load(fin);
+       % Store
+       time_all(i,:) = data(:,1);
+       msd_x_all(i,:) = data(:,2);
+       msd_y_all(i,:) = data(:,3);
+       msd_z_all(i,:) = data(:,4);
+       msd_tot_all(i,:) = data(:,5);
+       cd '../'
+    end
+    
+    % If not 0.0 (i.e. bins not equal), use interpolation to have all
+    % datasets on the same time grid
+    err=max(abs((std(time_all(:,1:end)))))
+    % Save data
+    save(fout);
+
 end
-% If not 0.0 (i.e. bins not equal), use interpolation
-err=max(abs((std(time_all(:,1:end)))))
-% Save data
-save('all_nafion_ion_diff');
 

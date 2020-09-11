@@ -72,7 +72,7 @@ def compute_spatial_density(fname, typeID, time, nbins, idir, wpos=[], all_steps
 				# So that the binning is simple 
 				# Shifted the interval to 0->L_tot
 				norm_pos = float(at[d_ind]) - L_0
-				number_density[math.floor(norm_pos/bin_width)] += 1
+				number_density[max(min(math.floor(norm_pos/bin_width), nbins-1),0)] += 1
 		
 		# Compute volume in cm^3 then convert to A^3
 		cm32A3 = 1.0e24 
