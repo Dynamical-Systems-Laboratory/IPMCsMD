@@ -5,9 +5,9 @@
 # ------------------------------------------------------------------
 
 import sys
-py_path = '../../../../../postprocessing/'
+py_path = '../../../../postprocessing/'
 sys.path.insert(0, py_path)
-py_path = '../../../../../postprocessing/io_operations/'
+py_path = '../../../../postprocessing/io_operations/'
 sys.path.insert(0, py_path)
 
 import os
@@ -25,7 +25,7 @@ d_pre_file = '../pre_nafion.d'
 # .data file
 cwd = os.getcwd()
 seed_no = cwd.split('/')[-2]
-data_file ='../../../../../construction/constructed_setups/DPD_based/sodium_models/' + seed_no + '/dpd.data' 
+data_file ='../../../../construction/constructed_setups/DPD_based/sodium_models/' + seed_no + '/dpd.data' 
 # Output files
 den_file = 'bulk_density_w_time.txt'
 pre_den_file = 'pre_bulk_density_w_time.txt'

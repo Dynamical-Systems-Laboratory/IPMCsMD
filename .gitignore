@@ -1,0 +1,22 @@
+# LAMMPS restart
+*.restart*
+
+# Other outputs
+*.ppm
+*.vmd
+*.log
+*.zip
+*.fig
+*.svg
+*.png
+*.pdf
+*.rdf
+*_diff
+*.xyz
+*.d
+#*.txt
+*.lammps
+*.mat
+
+# Python cache
+__pycache__

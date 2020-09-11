@@ -5,9 +5,9 @@
 # ------------------------------------------------------------------
 
 import sys
-py_path = '../../../../../postprocessing/'
+py_path = '../../../../postprocessing/'
 sys.path.insert(0, py_path)
-py_path = '../../../../../postprocessing/io_operations/'
+py_path = '../../../../postprocessing/io_operations/'
 sys.path.insert(0, py_path)
 
 import cn_and_rdf_lmp as crl
