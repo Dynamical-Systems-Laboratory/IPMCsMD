@@ -1,4 +1,10 @@
-%% Find the diffusive region
+%% Inspect the diffusive regime
+% This is just a visualization support
+% Actual search is done in a more robust way in diffusivity_post_proc
+% Need to plot the linear fit manually
+
+clear
+load('eq_nafion_ion_diff')
 
 Ds = [];
 betas = [];

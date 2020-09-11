@@ -11,12 +11,17 @@ ndirs = length(dir_names);
 all_densities = zeros(ndirs, 1);
 
 for i=1:ndirs
+    
    fname = dir_names(i);
    path = sprintf('%s',fname{:});
    % Move to path and execute the python script for averaging
    cd(sprintf('%s/post_processing/', path));
+   fprintf("Processing %s\n", path)
+   
+   % Uncomment if not using the bash script
    % Run the python script
-   ! /usr/local/bin/python3.6 density_analysis.py
+   %! /usr/local/bin/python3.6 density_analysis.py
+   
    % Load and store data 
    data = load('bulk_density_w_time.txt');
    % Compute average and store in all_densities
@@ -24,4 +29,4 @@ for i=1:ndirs
    cd '../../'
 end
 % Save data
-save('density_data');
+save('eq_density_data');
