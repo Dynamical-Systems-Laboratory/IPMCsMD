@@ -1,9 +1,11 @@
-function plot_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, ylab, figname)
+function add_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, ylab, figname)
+    
+    close all
+
     dy = std(y)';
     y = mean(y)';
     x = x';
     
-    % Create figure
     figure1 = openfig(figname);
     hold on
         
@@ -16,5 +18,7 @@ function plot_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, ylab, figname)
     [pks,locs] = findpeaks(y);
     if length(locs) > 0
         disp(x(locs(1:2)))
-    end   
+    end
+    
+    savefig(figname)
 end

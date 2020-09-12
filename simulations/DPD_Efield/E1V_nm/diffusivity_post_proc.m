@@ -17,7 +17,8 @@ function msd_plot_and_save(post_fin, post_fout, jfig)
 
     % Interval for computing the diffusion coefficients
     nt0 = 1; 
-    ntF = 50;
+    % Original was 50 but 500 covers the pre-pile up range
+    ntF = 500;
 
     [xx,yx,dyx] = get_mean(time_all, msd_x_all);
     msd_fig(xx, yx, dyx,[174/255, 229/255, 183/255],[40/255, 182/255, 40/255], jfig, '$\mathrm{MSD_{x}}$')
