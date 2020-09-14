@@ -1,0 +1,153 @@
+#
+# Apply electric field according to:
+# 	https://lammps.sandia.gov/doc/fix_efield.html
+# 
+
+# Load the settings through the restart files
+read_restart ../../../../equilibration/DPD_based/sodium_models/seed_1/nafion.restart
+
+# This actually needs to be redefined
+variable	precision	index	0.001		# kspace precision
+variable	cutoff		index	10.0		# standard cutoff
+kspace_style 	pppm		${precision}
+
+# Paths and file names
+variable	project		index	"efield_nafion"						# project name
+
+# System properties
+variable	sys_temp	index	300		# system temperature, K
+variable 	sys_press	index	1		# system pressure, atm	
+variable	tdamp		index	100		# temperature damping
+variable	pdamp		index	100		# pressure damping
+variable	sys_efld		index	0.1		# electric field, V/A
+
+# Times and time steps
+variable	dtthermo	index	10000				# time step for thermo output
+variable	timestep	index	1					# integration time step
+variable	vmd_step	equal	100000		# time step for vmd xyz movie saving 
+variable	atom_step	index	10000			# time step for atom information dumping during target dump time
+
+#
+# Groups
+#
+
+group sodium type 6
+group water type 7 8
+group water_ions type 6 7 8
+
+#
+# Walls
+#
+
+run 0 
+change_box all x final -2.0 45.0 
+
+fix wallx0 sodium wall/lj93 xlo EDGE 0.1 1.0 ${cutoff} units box pbc yes 
+fix wallxF sodium wall/lj93 xhi EDGE 0.1 1.0 ${cutoff} units box pbc yes
+
+#
+# Output
+#
+
+# Averages
+thermo_style 	custom step time temp density pe ke etotal press pxx pyy pzz pxy pxz pyz
+thermo		${dtthermo}
+
+# VMD movie
+dump vmd_movie all xyz ${vmd_step} efield_nafion.xyz
+dump_modify vmd_movie element C F O S O Na H O
+
+# Just ions
+dump vmd_just_ions sodium xyz ${vmd_step} JustIons.xyz
+dump_modify vmd_movie element C F O S O Na H O 
+
+# Water and ions
+dump vmd_watert_ions water_ions xyz ${vmd_step} WaterIons.xyz
+dump_modify vmd_movie element C F O S O Na H O 
+
+# Images
+dump lmp_img sodium image ${vmd_step} nafion_ion_*.ppm type type
+dump_modify vmd_movie element C F O S O Na H O
+
+#
+# Water - make molecules rigid
+#
+
+fix wrig water shake 0.0001 20 0 b 7 a 12
+
+#
+# Stresses per atom (times volume)
+#
+
+compute AtStr all stress/atom NULL
+
+#
+# Dump file
+#
+
+# Atom information DUMP file for collection period
+dump lmp_dump all custom ${atom_step} ${project}.d id type x y z vx vy vz c_AtStr[1] c_AtStr[2] c_AtStr[3] c_AtStr[4] c_AtStr[5] c_AtStr[6]
+
+#
+# RDF and CN
+# 
+
+# Compute RDF and CN for select types of pairs
+compute nrdf all rdf 300 4 8 4 6 4 4 8 8
+# The columns consists of 
+# steps | radial distance | RDF first pair | CN first pair | ... 
+
+# Save RDFs
+# This will save an RDF and every 500 steps without any time averaging
+fix nrdfAve all ave/time 500 1 500 c_nrdf[*] file nafion.rdf mode vector
+
+#
+# Diffusion coefficients
+# 
+
+# Water 
+compute wMSD water msd
+fix wdiffAve all ave/time 500 1 500 c_wMSD[1] c_wMSD[2] c_wMSD[3] c_wMSD[4] file nafion.water_diff mode scalar
+
+# Ion
+compute iMSD sodium msd
+fix idiffAve all ave/time 500 1 500 c_iMSD[1] c_iMSD[2] c_iMSD[3] c_iMSD[4] file nafion.ion_diff mode scalar
+
+#
+# Run
+#
+
+# For saving
+variable now equal time
+
+# First step - no field, just NVT
+fix no_efld all nvt temp ${sys_temp} ${sys_temp} ${tdamp}
+run 500000 every 500000 "write_restart intermediate_nvt_time_${now}_fs.restart" 
+unfix no_efld
+
+# Second step: efield
+fix bulk_E all efield ${sys_efld} 0.0 0.0  
+
+fix nvt_efld all nvt temp ${sys_temp} ${sys_temp} ${tdamp}
+run 3000000 every 1000000 "write_restart intermediate_nvt_time_${now}_fs.restart" 
+unfix nvt_efld
+
+#
+# Remove fixes
+#
+
+unfix bulk_E
+unfix wrig
+unfix nrdfAve
+unfix wdiffAve
+unfix idiffAve
+unfix wallx0
+unfix wallxF
+
+#
+# Save final state
+#
+
+write_restart	${project}.restart
+
+

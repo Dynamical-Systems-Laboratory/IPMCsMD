@@ -17,12 +17,13 @@ function msd_plot_and_save(post_fin, post_fout, jfig)
 
     % Interval for computing the diffusion coefficients
     nt0 = 1; 
-    ntF = 100;
+    ntF = 10;
 
     [xx,yx,dyx] = get_mean(time_all, msd_x_all);
     msd_fig(xx, yx, dyx,[174/255, 229/255, 183/255],[40/255, 182/255, 40/255], jfig, '$\mathrm{MSD_{x}}$')
     [Dx_mean, Dx_std] = average_diffusion_coefs(time_all, msd_x_all, nt0, ntF)
     
+       
     [xy,yy,dyy] = get_mean(time_all, msd_y_all);
     msd_fig(xy,yy,dyy,[180/255, 209/255, 223/255],[17/255, 122/255, 175/255], jfig+1, '$\mathrm{MSD_{y}}$')
     [Dy_mean, Dy_std] = average_diffusion_coefs(time_all, msd_y_all, nt0, ntF)

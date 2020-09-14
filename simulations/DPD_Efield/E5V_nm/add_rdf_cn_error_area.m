@@ -1,4 +1,4 @@
-function add_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, ylab, figname)
+function add_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, ylab, figname, cn_plot)
     
     close all
 
@@ -15,10 +15,22 @@ function add_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, ylab, figname)
     
        disp(ylab)
     disp(rdf_title)
-    [pks,locs] = findpeaks(y);
-    if length(locs) > 0
-        disp(x(locs(1:2)))
+    if cn_plot == 0
+        % RDF - look at peaks
+        disp('RDF peaks')
+        [pks,locs] = findpeaks(y);
+        if length(locs) > 0
+            disp(x(locs(1:2)))
+        end
+    else
+        % CN - value at 10 A
+        disp('CN at 10 A')
+        xpp = 0:0.001:10; 
+        ypp = pchip(x,y,xpp);
+        dy_pp = pchip(x,dy,xpp);
+
+        disp(ypp(end))
+        disp(dy_pp(end))
     end
-    
     savefig(figname)
 end
