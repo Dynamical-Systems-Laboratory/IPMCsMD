@@ -6,7 +6,7 @@
 (* define variables *)
 
 variables	= {
-  seed		-> 526521,
+  seed		-> 527367,
   ntotal	-> 7195,
   fshape	-> 1,
   output	-> "dpd",
