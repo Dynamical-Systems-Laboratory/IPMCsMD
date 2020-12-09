@@ -2,7 +2,7 @@
 
 # Variables
 
-variable	seed		index	529048
+variable	seed		index	531539
 variable	ntotal		index	7364
 variable	fshape		index	1
 variable	output		index	dpd
