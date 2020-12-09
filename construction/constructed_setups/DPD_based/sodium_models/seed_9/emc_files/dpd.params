@@ -1,13 +1,13 @@
-# LAMMPS parameters created by EMC v9.4.4, build Aug  6 2019 08:14:42
+# LAMMPS parameters created by EMC v9.4.4, build Jul 30 2020 09:28:04
 
 # Variables
 
-variable	seed		index	451990
-variable	ntotal		index	7994
+variable	seed		index	518003
+variable	ntotal		index	7364
 variable	fshape		index	1
 variable	output		index	dpd
 variable	field		index	dpd/general
-variable	location	index	../../../field/
+variable	location	index	../../field/
 variable	nav		index	1
 variable	temperature	index	1
 variable	radius		index	1
@@ -19,12 +19,14 @@ variable	cutoff		index	1
 variable	charge_cutoff	index	3
 variable	kappa		index	1
 variable	density1	index	0.1
-variable	f_poly		index	0.601850827457
-variable	f_water		index	0.398149172543
+variable	lprevious	index	0
+variable	lphase		index	41.9151727052
+variable	f_poly		index	0.649791497764
+variable	f_water		index	0.350208502236
 variable	chem_ngroup	index	*[C+0.32750]([F-0.15760])([F-0.15760])[C+0.32750]([F-0.15760])([F-0.15760])*
-variable	chem_mgroup	index	*[C+0.2465]([F-0.1336])([F-0.1336])[C+0.1317]([F-0.1193])*[Oc-0.3109][C+0.4954]([F-0.1280])([F-0.1559])[C+0.0465]([F-0.1122])([C+0.5842]([F-0.1563])([F-0.1736])[F-0.1844])[Oc-0.2516][C+0.4557]([F-0.1368])([F-0.1393])[C+0.1062]([F-0.1457])([F-0.1482])[S+1.1345](=[Os-0.6371])(=[Os-0.6371])[Os-0.6371][Na+1.0]
+variable	chem_mgroup	index	*[C+0.2465]([F-0.1336])([F-0.1336])[C+0.1317]([F-0.1193])*[GFOc-0.3109][C+0.4954]([F-0.1280])([F-0.1559])[C+0.0465]([F-0.1122])([C+0.5842]([F-0.1563])([F-0.1736])[F-0.1844])[GFOc-0.2516][C+0.4557]([F-0.1368])([F-0.1393])[C+0.1062]([F-0.1457])([F-0.1482])[GGS+1.1345](=[GOs-0.6371])(=[GOs-0.6371])[GOs-0.6371][Na+1.0]
 variable	chem_tgroup	index	*[F-0.161]
-variable	chem_water	index	[H+0.4238][O-0.8476][H+0.4238]
+variable	chem_water	index	[WH+0.4238][WO-0.8476][WH+0.4238]
 variable	lg_ngroup	index	6
 variable	lg_mgroup	index	27
 variable	lg_tgroup	index	1
@@ -39,36 +41,35 @@ variable	mg_tgroup	index	20
 variable	mg_water	index	60
 variable	m_poly		index	13840
 variable	m_water		index	60
-variable	norm		index	6841.71069
+variable	norm		index	6336.93924
 variable	n_poly		index	7
-variable	n_water		index	1050
-variable	mtotal		index	159880
-variable	nphase1		index	7994
-variable	mphase1		index	159880
-variable	vphase1		index	79940
-variable	lbox		index	43.077918933
-variable	lphase1		index	43.077918933
-variable	lxx		index	43.077918933
-variable	lyy		index	43.077918933
-variable	lzz		index	43.077918933
+variable	n_water		index	840
+variable	mtotal		index	147280
+variable	nphase1		index	7364
+variable	mphase1		index	147280
+variable	vphase1		index	73640
+variable	lbox		index	41.9151727052
+variable	lphase1		index	41.9151727052
+variable	lxx		index	41.9151727052
+variable	lyy		index	41.9151727052
+variable	lzz		index	41.9151727052
 variable	lzy		index	0
 variable	lzx		index	0
 variable	lyx		index	0
-variable	lphase		index	43.077918933
-variable	vtotal		index	79940
+variable	vtotal		index	73640
 variable	nl_poly		index	7
-variable	nl_water	index	1050
+variable	nl_water	index	840
 
 # Types
 
 variable	type_C		index	1
 variable	type_F		index	2
-variable	type_Oc		index	3
-variable	type_S		index	4
-variable	type_Os		index	5
+variable	type_GFOc	index	3
+variable	type_GGS	index	4
+variable	type_GOs	index	5
 variable	type_Na		index	6
-variable	type_H		index	7
-variable	type_O		index	8
+variable	type_WH		index	7
+variable	type_WO		index	8
 
 # Flags
 
@@ -78,12 +79,12 @@ variable	flag_charged	index	1
 
 mass		1    20.00000  # C
 mass		2    20.00000  # F
-mass		3    20.00000  # Oc
-mass		4    20.00000  # S
-mass		5    20.00000  # Os
+mass		3    20.00000  # GFOc
+mass		4    20.00000  # GGS
+mass		5    20.00000  # GOs
 mass		6    20.00000  # Na
-mass		7    20.00000  # H
-mass		8    20.00000  # O
+mass		7    20.00000  # WH
+mass		8    20.00000  # WO
 
 # Potentials
 
@@ -91,7 +92,7 @@ pair_style	hybrid/overlay &
 		dpd ${temperature} ${cutoff} ${vseed} &
 		dpd/charge ${charge_cutoff} ${kappa}
 bond_style	harmonic
-angle_style	harmonic
+angle_style	cosine/squared
 dihedral_style	multi/harmonic
 special_bonds	lj/coul 1 1 1
 
@@ -101,80 +102,80 @@ pair_coeff	 *  * dpd/charge
 
 pair_coeff	 1  1 dpd   25.00000    4.50000    1.00000  # C,C
 pair_coeff	 1  2 dpd   25.00000    4.50000    1.00000  # C,F
-pair_coeff	 1  3 dpd   25.00000    4.50000    1.00000  # C,Oc
-pair_coeff	 1  4 dpd   25.00000    4.50000    1.00000  # C,S
-pair_coeff	 1  5 dpd   25.00000    4.50000    1.00000  # C,Os
+pair_coeff	 1  3 dpd   25.00000    4.50000    1.00000  # C,GFOc
+pair_coeff	 1  4 dpd   25.00000    4.50000    1.00000  # C,GGS
+pair_coeff	 1  5 dpd   25.00000    4.50000    1.00000  # C,GOs
 pair_coeff	 1  6 dpd   25.00000    4.50000    1.00000  # C,Na
-pair_coeff	 1  7 dpd   25.00000    4.50000    1.00000  # C,H
-pair_coeff	 1  8 dpd   25.00000    4.50000    1.00000  # C,O
+pair_coeff	 1  7 dpd   25.00000    4.50000    1.00000  # C,WH
+pair_coeff	 1  8 dpd   25.00000    4.50000    1.00000  # C,WO
 pair_coeff	 2  2 dpd   25.00000    4.50000    1.00000  # F,F
-pair_coeff	 2  3 dpd   25.00000    4.50000    1.00000  # F,Oc
-pair_coeff	 2  4 dpd   25.00000    4.50000    1.00000  # F,S
-pair_coeff	 2  5 dpd   25.00000    4.50000    1.00000  # F,Os
+pair_coeff	 2  3 dpd   25.00000    4.50000    1.00000  # F,GFOc
+pair_coeff	 2  4 dpd   25.00000    4.50000    1.00000  # F,GGS
+pair_coeff	 2  5 dpd   25.00000    4.50000    1.00000  # F,GOs
 pair_coeff	 2  6 dpd   25.00000    4.50000    1.00000  # F,Na
-pair_coeff	 2  7 dpd   25.00000    4.50000    1.00000  # F,H
-pair_coeff	 2  8 dpd   25.00000    4.50000    1.00000  # F,O
-pair_coeff	 3  3 dpd   25.00000    4.50000    1.00000  # Oc,Oc
-pair_coeff	 3  4 dpd   25.00000    4.50000    1.00000  # Oc,S
-pair_coeff	 3  5 dpd   25.00000    4.50000    1.00000  # Oc,Os
-pair_coeff	 3  6 dpd   25.00000    4.50000    1.00000  # Oc,Na
-pair_coeff	 3  7 dpd   25.00000    4.50000    1.00000  # Oc,H
-pair_coeff	 3  8 dpd   25.00000    4.50000    1.00000  # Oc,O
-pair_coeff	 4  4 dpd   25.00000    4.50000    1.00000  # S,S
-pair_coeff	 4  5 dpd   25.00000    4.50000    1.00000  # S,Os
-pair_coeff	 4  6 dpd   25.00000    4.50000    1.00000  # S,Na
-pair_coeff	 4  7 dpd   25.00000    4.50000    1.00000  # S,H
-pair_coeff	 4  8 dpd   25.00000    4.50000    1.00000  # S,O
-pair_coeff	 5  5 dpd   25.00000    4.50000    1.00000  # Os,Os
-pair_coeff	 5  6 dpd   25.00000    4.50000    1.00000  # Os,Na
-pair_coeff	 5  7 dpd   25.00000    4.50000    1.00000  # Os,H
-pair_coeff	 5  8 dpd   25.00000    4.50000    1.00000  # Os,O
+pair_coeff	 2  7 dpd   25.00000    4.50000    1.00000  # F,WH
+pair_coeff	 2  8 dpd   25.00000    4.50000    1.00000  # F,WO
+pair_coeff	 3  3 dpd   25.00000    4.50000    1.00000  # GFOc,GFOc
+pair_coeff	 3  4 dpd   25.00000    4.50000    1.00000  # GFOc,GGS
+pair_coeff	 3  5 dpd   25.00000    4.50000    1.00000  # GFOc,GOs
+pair_coeff	 3  6 dpd   25.00000    4.50000    1.00000  # GFOc,Na
+pair_coeff	 3  7 dpd   25.00000    4.50000    1.00000  # GFOc,WH
+pair_coeff	 3  8 dpd   25.00000    4.50000    1.00000  # GFOc,WO
+pair_coeff	 4  4 dpd   25.00000    4.50000    1.00000  # GGS,GGS
+pair_coeff	 4  5 dpd   25.00000    4.50000    1.00000  # GGS,GOs
+pair_coeff	 4  6 dpd   25.00000    4.50000    1.00000  # GGS,Na
+pair_coeff	 4  7 dpd   25.00000    4.50000    1.00000  # GGS,WH
+pair_coeff	 4  8 dpd   25.00000    4.50000    1.00000  # GGS,WO
+pair_coeff	 5  5 dpd   25.00000    4.50000    1.00000  # GOs,GOs
+pair_coeff	 5  6 dpd   25.00000    4.50000    1.00000  # GOs,Na
+pair_coeff	 5  7 dpd   25.00000    4.50000    1.00000  # GOs,WH
+pair_coeff	 5  8 dpd   25.00000    4.50000    1.00000  # GOs,WO
 pair_coeff	 6  6 dpd   25.00000    4.50000    1.00000  # Na,Na
-pair_coeff	 6  7 dpd   25.00000    4.50000    1.00000  # Na,H
-pair_coeff	 6  8 dpd   25.00000    4.50000    1.00000  # Na,O
-pair_coeff	 7  7 dpd   25.00000    4.50000    1.00000  # H,H
-pair_coeff	 7  8 dpd   25.00000    4.50000    1.00000  # H,O
-pair_coeff	 8  8 dpd   25.00000    4.50000    1.00000  # O,O
+pair_coeff	 6  7 dpd   25.00000    4.50000    1.00000  # Na,WH
+pair_coeff	 6  8 dpd   25.00000    4.50000    1.00000  # Na,WO
+pair_coeff	 7  7 dpd   25.00000    4.50000    1.00000  # WH,WH
+pair_coeff	 7  8 dpd   25.00000    4.50000    1.00000  # WH,WO
+pair_coeff	 8  8 dpd   25.00000    4.50000    1.00000  # WO,WO
 
 # Bond Coeffs
 
 bond_coeff	1   10.00000    1.00000  # C,C
 bond_coeff	2   10.00000    1.00000  # C,F
-bond_coeff	3   10.00000    1.00000  # C,Oc
-bond_coeff	4   10.00000    1.00000  # C,S
-bond_coeff	5   10.00000    1.00000  # S,Os
-bond_coeff	6   10.00000    1.00000  # Os,Na
-bond_coeff	7   10.00000    1.00000  # H,O
+bond_coeff	3   10.00000    1.00000  # C,GFOc
+bond_coeff	4   10.00000    1.00000  # C,GGS
+bond_coeff	5   10.00000    1.00000  # GGS,GOs
+bond_coeff	6   10.00000    1.00000  # GOs,Na
+bond_coeff	7   10.00000    1.00000  # WH,WO
 
 # Angle Coeffs
 
 angle_coeff	 1    2.00000  180.00000  # C,C,C
 angle_coeff	 2    2.00000  180.00000  # C,C,F
-angle_coeff	 3    2.00000  180.00000  # C,C,Oc
-angle_coeff	 4    2.00000  180.00000  # C,C,S
-angle_coeff	 5    2.00000  180.00000  # C,Oc,C
-angle_coeff	 6    2.00000  180.00000  # C,S,Os
+angle_coeff	 3    2.00000  180.00000  # C,C,GFOc
+angle_coeff	 4    2.00000  180.00000  # C,C,GGS
+angle_coeff	 5    2.00000  180.00000  # C,GFOc,C
+angle_coeff	 6    2.00000  180.00000  # C,GGS,GOs
 angle_coeff	 7    2.00000  180.00000  # F,C,F
-angle_coeff	 8    2.00000  180.00000  # F,C,Oc
-angle_coeff	 9    2.00000  180.00000  # F,C,S
-angle_coeff	10    2.00000  180.00000  # S,Os,Na
-angle_coeff	11    2.00000  180.00000  # Os,S,Os
-angle_coeff	12    2.00000  180.00000  # H,O,H
+angle_coeff	 8    2.00000  180.00000  # F,C,GFOc
+angle_coeff	 9    2.00000  180.00000  # F,C,GGS
+angle_coeff	10    2.00000  180.00000  # GGS,GOs,Na
+angle_coeff	11    2.00000  180.00000  # GOs,GGS,GOs
+angle_coeff	12    2.00000  180.00000  # WH,WO,WH
 
 # Dihedral Coeffs
 
 dihedral_coeff	 1    0.00000    0.00000    0.00000    0.00000    0.00000  # C,C,C,C
 dihedral_coeff	 2    0.00000    0.00000    0.00000    0.00000    0.00000  # C,C,C,F
-dihedral_coeff	 3    0.00000    0.00000    0.00000    0.00000    0.00000  # C,C,C,Oc
-dihedral_coeff	 4    0.00000    0.00000    0.00000    0.00000    0.00000  # C,C,Oc,C
-dihedral_coeff	 5    0.00000    0.00000    0.00000    0.00000    0.00000  # C,C,S,Os
-dihedral_coeff	 6    0.00000    0.00000    0.00000    0.00000    0.00000  # C,Oc,C,F
-dihedral_coeff	 7    0.00000    0.00000    0.00000    0.00000    0.00000  # C,S,Os,Na
+dihedral_coeff	 3    0.00000    0.00000    0.00000    0.00000    0.00000  # C,C,C,GFOc
+dihedral_coeff	 4    0.00000    0.00000    0.00000    0.00000    0.00000  # C,C,GFOc,C
+dihedral_coeff	 5    0.00000    0.00000    0.00000    0.00000    0.00000  # C,C,GGS,GOs
+dihedral_coeff	 6    0.00000    0.00000    0.00000    0.00000    0.00000  # C,GFOc,C,F
+dihedral_coeff	 7    0.00000    0.00000    0.00000    0.00000    0.00000  # C,GGS,GOs,Na
 dihedral_coeff	 8    0.00000    0.00000    0.00000    0.00000    0.00000  # F,C,C,F
-dihedral_coeff	 9    0.00000    0.00000    0.00000    0.00000    0.00000  # F,C,C,Oc
-dihedral_coeff	10    0.00000    0.00000    0.00000    0.00000    0.00000  # F,C,C,S
-dihedral_coeff	11    0.00000    0.00000    0.00000    0.00000    0.00000  # F,C,S,Os
-dihedral_coeff	12    0.00000    0.00000    0.00000    0.00000    0.00000  # Oc,C,C,Oc
-dihedral_coeff	13    0.00000    0.00000    0.00000    0.00000    0.00000  # Oc,C,C,S
-dihedral_coeff	14    0.00000    0.00000    0.00000    0.00000    0.00000  # Os,S,Os,Na
+dihedral_coeff	 9    0.00000    0.00000    0.00000    0.00000    0.00000  # F,C,C,GFOc
+dihedral_coeff	10    0.00000    0.00000    0.00000    0.00000    0.00000  # F,C,C,GGS
+dihedral_coeff	11    0.00000    0.00000    0.00000    0.00000    0.00000  # F,C,GGS,GOs
+dihedral_coeff	12    0.00000    0.00000    0.00000    0.00000    0.00000  # GFOc,C,C,GFOc
+dihedral_coeff	13    0.00000    0.00000    0.00000    0.00000    0.00000  # GFOc,C,C,GGS
+dihedral_coeff	14    0.00000    0.00000    0.00000    0.00000    0.00000  # GOs,GGS,GOs,Na
 

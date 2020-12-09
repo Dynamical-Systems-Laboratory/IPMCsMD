@@ -1,17 +1,17 @@
 (* EMC: Script *)
 
-(* Created by emc_setup.pl v3.9.0, July 28, 2019
-   on Wed Jun  3 08:41:38 EDT 2020 *)
+(* Created by emc_setup.pl v3.9.7, August 21, 2020
+   on Wed Sep  9 20:22:05 EDT 2020 *)
 
 (* define variables *)
 
 variables	= {
-  seed		-> 451990,
-  ntotal	-> 7910,
+  seed		-> 518003,
+  ntotal	-> 7195,
   fshape	-> 1,
   output	-> "dpd",
   field		-> "dpd/general",
-  location	-> $root+"field/",
+  location	-> "../../field/",
 
   nav		-> 1,
   temperature	-> 1,
@@ -25,14 +25,17 @@ variables	= {
   kappa		-> 1,
 
   density1	-> 0.1,
+  lprevious	-> 0,
+  lphase	-> 0,
 
   f_poly	-> 82353.7848,
-  f_water	-> 54480.4290,
+  f_water	-> 44385,
 
- chem_ngroup	-> "*[C+0.32750]([F-0.15760])([F-0.15760])[C+0.32750]([F-0.15760])([F-0.15760])*",
-  chem_mgroup	-> "*[C+0.2465]([F-0.1336])([F-0.1336])[C+0.1317]([F-0.1193])*[Oc-0.3109][C+0.4954]([F-0.1280])([F-0.1559])[C+0.0465]([F-0.1122])([C+0.5842]([F-0.1563])([F-0.1736])[F-0.1844])[Oc-0.2516][C+0.4557]([F-0.1368])([F-0.1393])[C+0.1062]([F-0.1457])([F-0.1482])[S+1.1345](=[Os-0.6371])(=[Os-0.6371])[Os-0.6371][Na+1.0]",
+  chem_ngroup	-> "*[C+0.32750]([F-0.15760])([F-0.15760])[C+0.32750]([F-0.15760])([F-0.15760])*",
+  chem_mgroup	-> "*[C+0.2465]([F-0.1336])([F-0.1336])[C+0.1317]([F-0.1193])*[GFOc-0.3109][C+0.4954]([F-0.1280])([F-0.1559])[C+0.0465]([F-0.1122])([C+0.5842]([F-0.1563])([F-0.1736])[F-0.1844])[GFOc-0.2516][C+0.4557]([F-0.1368])([F-0.1393])[C+0.1062]([F-0.1457])([F-0.1482])[GGS+1.1345](=[GOs-0.6371])(=[GOs-0.6371])[GOs-0.6371][Na+1.0]",
   chem_tgroup	-> "*[F-0.161]",
-  chem_water	-> "[H+0.4238][O-0.8476][H+0.4238]"
+  chem_water	-> "[WH+0.4238][WO-0.8476][WH+0.4238]"
+
 };
 
 output		= {
@@ -49,7 +52,7 @@ field		= {
   mode		-> dpd,
   name		-> location+field+".prm",
   compress	-> false,
-  torsion 	-> empty
+  torsion   -> empty
 };
 
 (* define groups *)
@@ -220,6 +223,7 @@ build		= {
       nbonded	-> 20,
       ntrials	-> 20,
       niterations -> 1000,
+      theta	-> 0,
       weight	-> {
 	bonded	-> weight_bond, nonbonded -> weight_nonbond,
 	focus	-> weight_focus}
@@ -241,9 +245,9 @@ variables	= {
 
 put		= {name -> output, compress -> true};
 
-pdb		= {name -> output, compress -> true, forcefield -> dpd,
-		   detect -> false, hexadecimal -> false, unwrap -> 1,
-		   pbc -> true, atom -> index, residue -> index,
+pdb		= {name -> output, compress -> true, extend -> false,
+		   forcefield -> dpd, detect -> false, hexadecimal -> false,
+		   unwrap -> true, pbc -> true, atom -> index, residue -> index,
 		   segment -> index, rank -> false, vdw -> false, cut -> false,
 		   fixed -> true, rigid -> true, connectivity -> false,
 		   parameters -> false};

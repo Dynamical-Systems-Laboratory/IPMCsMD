@@ -20,8 +20,8 @@ lmp_data_file = './dpd.data'
 lmp_params_file = './dpd.params'
 
 # Atom type conversion (new to old atom labelling)
-type_map = {'C':'c', 'F':'f', 'Oc':'oc', 'S':'s', 'Os':'o=', 
-				'Na':'na+', 'H':'hw', 'O':'o*'} 
+type_map = {'C':'c', 'F':'f', 'GFOc':'oc', 'GGS':'s', 'GOs':'o=', 
+				'Na':'na+', 'WH':'hw', 'WO':'o*'} 
 
 #
 # Atoms

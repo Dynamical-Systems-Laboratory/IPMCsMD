@@ -28,7 +28,7 @@ mol showrep top 0 1
 # set atom radii
 
 set radii {0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5}
-set types {"C" "F" "Oc" "S" "Os" "Na" "H" "O"}
+set types {"C" "F" "GFOc" "GGS" "GOs" "Na" "WH" "WO"}
 foreach type ${types} radius ${radii} {
   set atoms [atomselect top "type \"${type}\""]
   $atoms set radius ${radius}
