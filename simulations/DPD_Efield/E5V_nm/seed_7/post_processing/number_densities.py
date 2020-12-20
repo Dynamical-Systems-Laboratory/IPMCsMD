@@ -16,7 +16,6 @@ import io_module as io
 
 # Input files
 dfile = '../efield_nafion.d'
-pre_dfile = '../pre_nafion.d'
 # Output files
 ofile = 'number_density_'
 pre_ofile = 'pre_number_density_'
@@ -52,6 +51,6 @@ for ID in typeID:
 	densities = ctd.compute_spatial_density(dfile, ID, times, nbins, idir)
 	io.write_data(out_file[str(ID)], densities, len(times))
 
-	pre_densities = ctd.compute_spatial_density(pre_dfile, ID, pre_times, nbins, idir)
+	pre_densities = ctd.compute_spatial_density(dfile, ID, pre_times, nbins, idir)
 	io.write_data(pre_out_file[str(ID)], pre_densities, len(pre_times))
 

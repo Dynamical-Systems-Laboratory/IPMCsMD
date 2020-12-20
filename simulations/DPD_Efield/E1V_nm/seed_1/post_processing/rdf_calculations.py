@@ -18,9 +18,13 @@ import io_module as io
 #
 
 # RDF and CN intput file
-rdf_file = '../nafion.rdf'
+rdf_file = '../nafion.rdf' #'../with_efield_nafion.rdf'
+# RDF and CN intput file
+pre_rdf_file = '../pre_efield_nafion.rdf'
+
 # Output files
 out_file = 'rdf_cn_averaged.txt'
+pre_out_file = 'pre_rdf_cn_averaged.txt'
 
 # Number of bins
 nbins = 300
@@ -30,4 +34,6 @@ ncols = 10
 
 # Part with the electric field
 crl.compute_time_average(rdf_file, out_file, nbins, ncols)
+# Part before that
+#crl.compute_time_average(pre_rdf_file, pre_out_file, nbins, ncols)
 

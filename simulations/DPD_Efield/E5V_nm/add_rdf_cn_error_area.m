@@ -1,4 +1,4 @@
-function add_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, clrb, ylab, figname, cn_plot)
+function add_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, ylab, figname, cn_plot)
     
     close all
 
@@ -9,7 +9,7 @@ function add_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, clrb, ylab, figname
     figure1 = openfig(figname);
     hold on
         
-    fill([x;flipud(x)],[y-dy;flipud(y+dy)],clrb,'linestyle','none');
+    fill([x;flipud(x)],[y-dy;flipud(y+dy)],[.7 .7 .7],'linestyle','none');
     line(x,y, 'LineWidth',2,...
         'Color', clr)
     

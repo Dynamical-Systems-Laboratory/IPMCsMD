@@ -3,54 +3,47 @@
 clear
 close all
 
-load('../../../equilibration/sodium_models/eq_rdf_data')
+load('E5V_nm_rdf_data')
 
-disp('Equilibrated')
+plot_rdf_cn_error_area(bin_pos(1,:), all_rdf_so, 'Sulfur - oxygen in water', 5, 1, [0.04,0.36,0.56], 'RDF', 'so_rdf', 0)
+plot_rdf_cn_error_area(bin_pos(1,:), all_rdf_ss, 'Sulfur - sulfur', 1.7, 2, [0.04,0.36,0.56], 'RDF', 'ss_rdf', 0)
+plot_rdf_cn_error_area(bin_pos(1,:), all_rdf_sna, 'Sulfur - $\mathrm{Na^+}$', 12.0, 3, [0.04,0.36,0.56], 'RDF', 'sna_rdf', 0)
+plot_rdf_cn_error_area(bin_pos(1,:), all_rdf_oo, 'Oxygen in water - oxygen in water', 8, 4, [0.04,0.36,0.56], 'RDF', 'oo_rdf', 0)
 
-plot_rdf_cn_error_area(bin_pos(1,:), all_rdf_so, 'Sulfur - oxygen in water', 5, 1, [88, 152, 191]/255, [230, 230, 230]/255, 'RDF', 'so_rdf', 0)
-plot_rdf_cn_error_area(bin_pos(1,:), all_rdf_ss, 'Sulfur - sulfur', 1.8, 2, [88, 152, 191]/255, [230, 230, 230]/255, 'RDF', 'ss_rdf', 0)
-plot_rdf_cn_error_area(bin_pos(1,:), all_rdf_sna, 'Sulfur - $\mathrm{Na^+}$', 12.0, 3, [88, 152, 191]/255, [230, 230, 230]/255, 'RDF', 'sna_rdf', 0)
-plot_rdf_cn_error_area(bin_pos(1,:), all_rdf_oo, 'Oxygen in water - oxygen in water', 8, 4, [88, 152, 191]/255, [230, 230, 230]/255, 'RDF', 'oo_rdf', 0)
-
-plot_rdf_cn_error_area(bin_pos(1,:), all_cn_so, 'Sulfur - oxygen in water', 60.0, 5, [88, 152, 191]/255, [230, 230, 230]/255, 'CN', 'so_cn', 1)
-plot_rdf_cn_error_area(bin_pos(1,:), all_cn_ss, 'Sulfur - sulfur', 3.0, 6, [88, 152, 191]/255, [230, 230, 230]/255, 'CN', 'ss_cn', 1)
-plot_rdf_cn_error_area(bin_pos(1,:), all_cn_sna, 'Sulfur - $\mathrm{Na^+}$', 5.0, 7, [88, 152, 191]/255, [230, 230, 230]/255, 'CN', 'sna_cn', 1)
-plot_rdf_cn_error_area(bin_pos(1,:), all_cn_oo, 'Oxygen in water - oxygen in water', 80.0, 8, [88, 152, 191]/255, [230, 230, 230]/255, 'CN', 'oo_cn', 1)
+plot_rdf_cn_error_area(bin_pos(1,:), all_cn_so, 'Sulfur - oxygen in water', 60.0, 5, [0.72,0.24,0.04], 'CN', 'so_cn', 1)
+plot_rdf_cn_error_area(bin_pos(1,:), all_cn_ss, 'Sulfur - sulfur', 3.0, 6, [0.72,0.24,0.04], 'CN', 'ss_cn', 1)
+plot_rdf_cn_error_area(bin_pos(1,:), all_cn_sna, 'Sulfur - $\mathrm{Na^+}$', 5.0, 7, [0.72,0.24,0.04], 'CN', 'sna_cn', 1)
+plot_rdf_cn_error_area(bin_pos(1,:), all_cn_oo, 'Oxygen in water - oxygen in water', 80.0, 8, [0.72,0.24,0.04], 'CN', 'oo_cn', 1)
 
 clear
 close all
 load('../E1V_nm/E1V_nm_rdf_data')
 
-disp('E1V_nm_rdf_data')
+add_rdf_cn_error_area(bin_pos(1,:), all_rdf_so, 'Sulfur - oxygen in water', 5, 1, [0.04,0.36,0.56], 'RDF', 'so_rdf', 0)
+add_rdf_cn_error_area(bin_pos(1,:), all_rdf_ss, 'Sulfur - sulfur', 1.7, 2, [0.04,0.36,0.56], 'RDF', 'ss_rdf', 0)
+add_rdf_cn_error_area(bin_pos(1,:), all_rdf_sna, 'Sulfur - $\mathrm{Na^+}$', 12.0, 3, [0.04,0.36,0.56], 'RDF', 'sna_rdf', 0)
+add_rdf_cn_error_area(bin_pos(1,:), all_rdf_oo, 'Oxygen in water - oxygen in water', 8, 4, [0.04,0.36,0.56], 'RDF', 'oo_rdf', 0)
 
-add_rdf_cn_error_area(bin_pos(1,:), all_rdf_so, 'Sulfur - oxygen in water', 5, 1, [10, 92, 143]/255,[179, 179, 179]/255, 'RDF', 'so_rdf', 0)
-add_rdf_cn_error_area(bin_pos(1,:), all_rdf_ss, 'Sulfur - sulfur', 1.7, 2, [10, 92, 143]/255,[179, 179, 179]/255, 'RDF', 'ss_rdf', 0)
-add_rdf_cn_error_area(bin_pos(1,:), all_rdf_sna, 'Sulfur - $\mathrm{Na^+}$', 12.0, 3, [10, 92, 143]/255,[179, 179, 179]/255, 'RDF', 'sna_rdf', 0)
-add_rdf_cn_error_area(bin_pos(1,:), all_rdf_oo, 'Oxygen in water - oxygen in water', 8, 4, [10, 92, 143]/255,[179, 179, 179]/255, 'RDF', 'oo_rdf', 0)
-
-add_rdf_cn_error_area(bin_pos(1,:), all_cn_so, 'Sulfur - oxygen in water', 60.0, 5, [10, 92, 143]/255,[179, 179, 179]/255, 'CN', 'so_cn', 1)
-add_rdf_cn_error_area(bin_pos(1,:), all_cn_ss, 'Sulfur - sulfur', 3.0, 6, [10, 92, 143]/255,[179, 179, 179]/255, 'CN', 'ss_cn', 1)
-add_rdf_cn_error_area(bin_pos(1,:), all_cn_sna, 'Sulfur - $\mathrm{Na^+}$', 5.0, 7, [10, 92, 143]/255,[179, 179, 179]/255, 'CN', 'sna_cn', 1)
-add_rdf_cn_error_area(bin_pos(1,:), all_cn_oo, 'Oxygen in water - oxygen in water', 80.0, 8, [10, 92, 143]/255,[179, 179, 179]/255, 'CN', 'oo_cn', 1)
+add_rdf_cn_error_area(bin_pos(1,:), all_cn_so, 'Sulfur - oxygen in water', 60.0, 5, [0.72,0.24,0.04], 'CN', 'so_cn', 1)
+add_rdf_cn_error_area(bin_pos(1,:), all_cn_ss, 'Sulfur - sulfur', 3.0, 6, [0.72,0.24,0.04], 'CN', 'ss_cn', 1)
+add_rdf_cn_error_area(bin_pos(1,:), all_cn_sna, 'Sulfur - $\mathrm{Na^+}$', 5.0, 7, [0.72,0.24,0.04], 'CN', 'sna_cn', 1)
+add_rdf_cn_error_area(bin_pos(1,:), all_cn_oo, 'Oxygen in water - oxygen in water', 80.0, 8, [0.72,0.24,0.04], 'CN', 'oo_cn', 1)
 
 clear
 close all
+load('../../../equilibration/sodium_models/eq_rdf_data')
 
-load('E5V_nm_rdf_data')
+add_rdf_cn_error_area(bin_pos(1,:), all_rdf_so, 'Sulfur - oxygen in water', 5, 1, [0.04,0.6,0.56]*1.1, 'RDF', 'so_rdf', 0)
+add_rdf_cn_error_area(bin_pos(1,:), all_rdf_ss, 'Sulfur - sulfur', 1.7, 2, [0.04,0.6,0.56]*1.1, 'RDF', 'ss_rdf', 0)
+add_rdf_cn_error_area(bin_pos(1,:), all_rdf_sna, 'Sulfur - $\mathrm{Na^+}$', 12.0, 3, [0.04,0.6,0.56]*1.1, 'RDF', 'sna_rdf', 0)
+add_rdf_cn_error_area(bin_pos(1,:), all_rdf_oo, 'Oxygen in water - oxygen in water', 8, 4, [0.04,0.6,0.56]*1.1, 'RDF', 'oo_rdf', 0)
 
-disp('E5V_nm_rdf_data')
+add_rdf_cn_error_area(bin_pos(1,:), all_cn_so, 'Sulfur - oxygen in water', 60.0, 5, [0.2,0.4,0.04]*1.1, 'CN', 'so_cn', 1)
+add_rdf_cn_error_area(bin_pos(1,:), all_cn_ss, 'Sulfur - sulfur', 3.0, 6, [0.2,0.4,0.04]*1.1, 'CN', 'ss_cn', 1)
+add_rdf_cn_error_area(bin_pos(1,:), all_cn_sna, 'Sulfur - $\mathrm{Na^+}$', 5.0, 7, [0.2,0.4,0.04]*1.1, 'CN', 'sna_cn', 1)
+add_rdf_cn_error_area(bin_pos(1,:), all_cn_oo, 'Oxygen in water - oxygen in water', 80.0, 8, [0.2,0.4,0.04]*1.1, 'CN', 'oo_cn', 1)
 
-add_rdf_cn_error_area(bin_pos(1,:), all_rdf_so, 'Sulfur - oxygen in water', 5, 1, [9, 57, 87]/255, [128, 128, 128]/255, 'RDF', 'so_rdf', 0)
-add_rdf_cn_error_area(bin_pos(1,:), all_rdf_ss, 'Sulfur - sulfur', 1.7, 2, [9, 57, 87]/255, [128, 128, 128]/255, 'RDF', 'ss_rdf', 0)
-add_rdf_cn_error_area(bin_pos(1,:), all_rdf_sna, 'Sulfur - $\mathrm{Na^+}$', 12.0, 3, [9, 57, 87]/255, [128, 128, 128]/255, 'RDF', 'sna_rdf', 0)
-add_rdf_cn_error_area(bin_pos(1,:), all_rdf_oo, 'Oxygen in water - oxygen in water', 8, 4, [9, 57, 87]/255, [128, 128, 128]/255, 'RDF', 'oo_rdf', 0)
-
-add_rdf_cn_error_area(bin_pos(1,:), all_cn_so, 'Sulfur - oxygen in water', 60.0, 5, [9, 57, 87]/255, [128, 128, 128]/255, 'CN', 'so_cn', 1)
-add_rdf_cn_error_area(bin_pos(1,:), all_cn_ss, 'Sulfur - sulfur', 3.0, 6, [9, 57, 87]/255, [128, 128, 128]/255, 'CN', 'ss_cn', 1)
-add_rdf_cn_error_area(bin_pos(1,:), all_cn_sna, 'Sulfur - $\mathrm{Na^+}$', 5.0, 7, [9, 57, 87]/255, [128, 128, 128]/255, 'CN', 'sna_cn', 1)
-add_rdf_cn_error_area(bin_pos(1,:), all_cn_oo, 'Oxygen in water - oxygen in water', 80.0, 8, [9, 57, 87]/255, [128, 128, 128]/255, 'CN', 'oo_cn', 1)
-
-function plot_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, clrb, ylab, figname, cn_plot)
+function plot_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, ylab, figname, cn_plot)
 
     close all
 
@@ -64,7 +57,7 @@ function plot_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, clrb, ylab, fignam
     % Create axes
     axes1 = axes('Parent',figure1);
     
-    fill([x;flipud(x)],[y-dy;flipud(y+dy)],clrb,'linestyle','none');
+    fill([x;flipud(x)],[y-dy;flipud(y+dy)],[.7 .7 .7],'linestyle','none');
     line(x,y, 'LineWidth',2,...
         'Color', clr)
     
@@ -76,7 +69,7 @@ function plot_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, clrb, ylab, fignam
     ylabel(ylab,'Interpreter','latex');
 
     % Create xlabel
-    xlabel('Radial distance, $\mathrm{\AA}$','Interpreter','latex');
+    xlabel('Radial distance, $\AA$','Interpreter','latex');
 
     % Create title
     title(rdf_title,'Interpreter','latex');
@@ -90,7 +83,6 @@ function plot_rdf_cn_error_area(x,y, rdf_title, ymax, i, clr, clrb, ylab, fignam
     
     % ylim
     ylim([0.0,ymax]);
-    xlim([0.0, 10.0]);
     
     disp(ylab)
     disp(rdf_title)

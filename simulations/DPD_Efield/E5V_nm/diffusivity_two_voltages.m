@@ -3,35 +3,35 @@
 
 clear
 close all
-load('../E1V_nm/processed_E1V_nm_nafion_ion_diff')
+load('processed_E5V_nm_nafion_ion_diff')
 
-msd_fig(xx, yx, dyx,[213/255, 242/255, 218/255],[61/255, 201/255, 61/255], 1, '$\mathrm{MSD}\left(x\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_ion_x')
-msd_fig(xy,yy,dyy,[209/255, 228/255, 237/255],[69/255, 162/255, 208/255], 2, '$\mathrm{MSD}\left(y\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_ion_y')
-msd_fig(xz,yz,dyz,[242/255, 208/255, 213/255],[208/255, 106/255, 120/255], 3, '$\mathrm{MSD}\left(z\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_ion_z')
+msd_fig(xx, yx, dyx,[174/255, 229/255, 183/255],[40/255, 182/255, 40/255], 1, '$\mathrm{MSD_{x}}$', 'msd_ion_x')
+msd_fig(xy,yy,dyy,[180/255, 209/255, 223/255],[17/255, 122/255, 175/255], 2, '$\mathrm{MSD_{y}}$', 'msd_ion_y')
+msd_fig(xz,yz,dyz,[229/255, 163/255, 172/255],[201/255, 31/255, 54/255], 3, '$\mathrm{MSD_{z}}$', 'msd_ion_z')
 
 clear
 close all 
-load('processed_E5V_nm_nafion_ion_diff')
+load('../E1V_nm/processed_E1V_nm_nafion_ion_diff')
 
-add_msd_fig(xx, yx, dyx,[125/255, 186/255, 135/255],[27/255, 133/255, 27/255], 1, '$\mathrm{MSD}\left(x\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_ion_x')
-add_msd_fig(xy,yy,dyy,[180/255, 209/255, 223/255],[13/255, 93/255, 133/255], 2, '$\mathrm{MSD}\left(y\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_ion_y')
-add_msd_fig(xz,yz,dyz,[232/255, 144/255, 156/255],[156/255, 19/255, 37/255], 3, '$\mathrm{MSD}\left(z\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_ion_z')
+add_msd_fig(xx, yx, dyx,[174/255, 229/255, 183/255],[40/255, 182/255, 40/255], 1, '$\mathrm{MSD_{x}}$', 'msd_ion_x')
+add_msd_fig(xy,yy,dyy,[180/255, 209/255, 223/255],[17/255, 122/255, 175/255], 2, '$\mathrm{MSD_{y}}$', 'msd_ion_y')
+add_msd_fig(xz,yz,dyz,[229/255, 163/255, 172/255],[201/255, 31/255, 54/255], 3, '$\mathrm{MSD_{z}}$', 'msd_ion_z')
 
 clear
 close all
-load('../E1V_nm/processed_E1V_nm_nafion_water_diff')
+load('processed_E5V_nm_nafion_water_diff')
 
-msd_fig(xx, yx, dyx,[213/255, 242/255, 218/255],[61/255, 201/255, 61/255], 1, '$\mathrm{MSD}\left(x\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_water_x')
-msd_fig(xy,yy,dyy,[209/255, 228/255, 237/255],[69/255, 162/255, 208/255], 2, '$\mathrm{MSD}\left(y\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_water_y')
-msd_fig(xz,yz,dyz,[242/255, 208/255, 213/255],[208/255, 106/255, 120/255], 3, '$\mathrm{MSD}\left(z\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_water_z')
+msd_fig(xx, yx, dyx,[174/255, 229/255, 183/255],[40/255, 182/255, 40/255], 1, '$\mathrm{MSD_{x}}$', 'msd_water_x')
+msd_fig(xy,yy,dyy,[180/255, 209/255, 223/255],[17/255, 122/255, 175/255], 2, '$\mathrm{MSD_{y}}$', 'msd_water_y')
+msd_fig(xz,yz,dyz,[229/255, 163/255, 172/255],[201/255, 31/255, 54/255], 3, '$\mathrm{MSD_{z}}$', 'msd_water_z')
 
 clear
 close all 
-load('processed_E5V_nm_nafion_water_diff')
+load('../E1V_nm/processed_E1V_nm_nafion_water_diff')
 
-add_msd_fig(xx, yx, dyx,[125/255, 186/255, 135/255],[27/255, 133/255, 27/255], 1, '$\mathrm{MSD}\left(x\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_water_x')
-add_msd_fig(xy,yy,dyy,[180/255, 209/255, 223/255],[13/255, 93/255, 133/255], 2, '$\mathrm{MSD}\left(y\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_water_y')
-add_msd_fig(xz,yz,dyz,[232/255, 144/255, 156/255],[156/255, 19/255, 37/255], 3, '$\mathrm{MSD}\left(z\right)$, $\left[\mathrm{\AA^2}\right]$', 'msd_water_z')
+add_msd_fig(xx, yx, dyx,[174/255, 229/255, 183/255],[40/255, 182/255, 40/255], 1, '$\mathrm{MSD_{x}}$', 'msd_water_x')
+add_msd_fig(xy,yy,dyy,[180/255, 209/255, 223/255],[17/255, 122/255, 175/255], 2, '$\mathrm{MSD_{y}}$', 'msd_water_y')
+add_msd_fig(xz,yz,dyz,[229/255, 163/255, 172/255],[201/255, 31/255, 54/255], 3, '$\mathrm{MSD_{z}}$', 'msd_water_z')
 
 
 function msd_fig(x,y,dy,clrB, clrF, i, ylab, figname)
@@ -60,16 +60,13 @@ function msd_fig(x,y,dy,clrB, clrF, i, ylab, figname)
     % Uncomment the following line to preserve the Y-limits of the axes
     box(axes1,'on');
     % Set the remaining axes properties
-    set(axes1,'FontSize',28,'TickLabelInterpreter','latex','XGrid','on','YGrid',...
+    set(axes1,'FontSize',20,'TickLabelInterpreter','latex','XGrid','on','YGrid',...
         'on');
     
     grid on
     
     % Uncomment for custom limits
     %ylim([0.0,ymax]);
-    
-    xlim([8.6, 11.6])
-    xticks([8.6, 9.6, 10.6, 11.6])
     
     savefig(figname)
 end

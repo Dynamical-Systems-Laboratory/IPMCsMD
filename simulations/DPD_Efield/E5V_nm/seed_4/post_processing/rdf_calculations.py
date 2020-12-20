@@ -18,7 +18,7 @@ import io_module as io
 #
 
 # RDF and CN intput file
-rdf_file = '../nafion.rdf'
+rdf_file = '../with_efield_nafion.rdf'
 # Output files
 out_file = 'rdf_cn_averaged.txt'
 

@@ -16,7 +16,6 @@ import io_module as io
 
 # Input file
 dfile = '../efield_nafion.d'
-pre_dfile = '../pre_nafion.d'
 # Output file
 ofile = 'stresses_out_'
 pre_ofile = 'pre_stresses_out_'
@@ -58,7 +57,7 @@ for str_time in stresses:
 				fout.write(' ')
 			fout.write('\n')
 
-stresses = sp.compute_spatial_stress(pre_dfile, pre_times, nbins, idir)
+stresses = sp.compute_spatial_stress(dfile, pre_times, nbins, idir)
 for str_time in stresses:
 	for str_dir, str_value in str_time.items():
 		with open(pre_out_file[str_dir], 'a') as fout:

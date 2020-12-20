@@ -1,12 +1,11 @@
 %% Stress and concentration plots for all voltages
 clear
-load('../E1V_nm/E1V_nm_stress_conc_data')
-% load('stress_conc_data')
+load('stress_conc_data')
 
 % Box and bin dimensions
-box = [-6.8920100281133756e-01 4.2604373712814919e+01;
--3.9211809832795872e+00 4.5836353693286085e+01;
--5.3723467213784559e-01 4.2452407382139313e+01];
+box = [-2.0000000000000000e+00 4.5000000000000000e+01
+-1.6497992171793179e+00 4.4727718147189719e+01
+-1.6497992171793179e+00 4.4727718147189719e+01];
 dx=box(1,2)-box(1,1);
 L=dx/10;
 x=0:L/20:L;
@@ -35,8 +34,7 @@ plot_sc_error_area(xc, all_pre_s_xz, all_s_xz, '$\sigma_{xz}$', 9, [229/255, 163
 
 clear
 close all 
-% load('../E1V_nm/E1V_nm_stress_conc_data')
-load('stress_conc_data')
+load('../E1V_nm/E1V_nm_stress_conc_data')
 
 % Box and bin dimensions
 box = [-2.0000000000000000e+00 4.5000000000000000e+01

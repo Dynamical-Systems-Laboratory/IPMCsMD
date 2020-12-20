@@ -16,8 +16,8 @@ atom_style	full
 
 # Paths and file names
 variable	project		index	"nafion"						# project name
-variable	source		index	../../../construction/constructed_setups/DPD_based/bulk_7_chains_Na	# data directory
-variable	params		index	../../../construction/constructed_setups/DPD_based/bulk_7_chains_Na	# parameter directory
+variable	source		index	../../../../construction/constructed_setups/DPD_based/sodium_models/seed_1	# data directory
+variable	params		index	../../../../construction/constructed_setups/DPD_based/sodium_models/seed_1	# parameter directory
 variable 	data_file	index 	${params}/dpd.data 					# initial data file
 
 # System properties
@@ -31,7 +31,7 @@ variable	pdamp		index	100		# pressure damping
 variable	cutoff		index	10.0		# standard cutoff
 variable	charge_cutoff	index	10.0	# charge cutoff
 variable	precision	index	0.001		# kspace precision
-variable	vseed		index	486234		# velocity seed
+variable	vseed		index	1591188140	# velocity seed
 
 # Energy minimization settings
 variable 	etol       	index   0.0		# unitless stopping tolerance for energy
@@ -90,7 +90,7 @@ dump lmp_pre_dump all custom ${atom_step_pre} pre_nafion.d id type x y z
 thermo_style 	custom step time density temp pe ke etotal press
 thermo		${dtthermo}
 
-# Run energy minimization - 0K (check) and 1 atm pressure
+# Run energy minimization - 0K (check) and optionally 1 atm pressure
 #fix emin all box/relax iso 1.0  
 minimize ${etol} ${ftol} ${maxiter} ${maxeval}
 #unfix emin
