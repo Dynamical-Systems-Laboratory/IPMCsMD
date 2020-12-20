@@ -6,8 +6,8 @@ close all
 % Number of data points
 npoints = 6000;
 
-collect_msd('with_efield_nafion.ion_diff','E1V_nm_nafion_ion_diff', 'seed_*', npoints);
-collect_msd('with_efield_nafion.water_diff','E1V_nm_nafion_water_diff', 'seed_*', npoints);
+collect_msd('nafion.ion_diff','E1V_nm_nafion_ion_diff', 'seed_*', npoints);
+collect_msd('nafion.water_diff','E1V_nm_nafion_water_diff', 'seed_*', npoints);
 
 % All data
 function collect_msd(fin, fout, dirname, npoints)
