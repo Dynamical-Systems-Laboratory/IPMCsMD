@@ -4,7 +4,7 @@
 # 
 
 # Load the settings through the restart files
-read_restart ../../../../equilibration/DPD_based/sodium_models/seed_5/nafion.restart
+read_restart ../../../../equilibration/sodium_models/seed_1/nafion.restart
 
 # This actually needs to be redefined
 variable	precision	index	0.001		# kspace precision
@@ -34,16 +34,6 @@ variable	atom_step	index	10000			# time step for atom information dumping during
 group sodium type 6
 group water type 7 8
 group water_ions type 6 7 8
-
-#
-# Walls
-#
-
-run 0 
-change_box all x final -2.0 45.0 
-
-fix wallx0 sodium wall/lj93 xlo EDGE 0.1 1.0 ${cutoff} units box pbc yes 
-fix wallxF sodium wall/lj93 xhi EDGE 0.1 1.0 ${cutoff} units box pbc yes
 
 #
 # Output
@@ -81,12 +71,15 @@ fix wrig water shake 0.0001 20 0 b 7 a 12
 
 compute AtStr all stress/atom NULL
 
+# Following separates data collection before and during the electric
+# field application
+
 #
 # Dump file
 #
 
 # Atom information DUMP file for collection period
-dump lmp_dump all custom ${atom_step} ${project}.d id type x y z vx vy vz c_AtStr[1] c_AtStr[2] c_AtStr[3] c_AtStr[4] c_AtStr[5] c_AtStr[6]
+dump lmp_dump all custom ${atom_step} pre_nafion.d id type x y z vx vy vz c_AtStr[1] c_AtStr[2] c_AtStr[3] c_AtStr[4] c_AtStr[5] c_AtStr[6]
 
 #
 # RDF and CN
@@ -99,7 +92,7 @@ compute nrdf all rdf 300 4 8 4 6 4 4 8 8
 
 # Save RDFs
 # This will save an RDF and every 500 steps without any time averaging
-fix nrdfAve all ave/time 500 1 500 c_nrdf[*] file nafion.rdf mode vector
+fix nrdfAve all ave/time 500 1 500 c_nrdf[*] file pre_nafion.rdf mode vector
 
 #
 # Diffusion coefficients
@@ -107,11 +100,11 @@ fix nrdfAve all ave/time 500 1 500 c_nrdf[*] file nafion.rdf mode vector
 
 # Water 
 compute wMSD water msd
-fix wdiffAve all ave/time 500 1 500 c_wMSD[1] c_wMSD[2] c_wMSD[3] c_wMSD[4] file nafion.water_diff mode scalar
+fix wdiffAve all ave/time 500 1 500 c_wMSD[1] c_wMSD[2] c_wMSD[3] c_wMSD[4] file pre_nafion.water_diff mode scalar
 
 # Ion
 compute iMSD sodium msd
-fix idiffAve all ave/time 500 1 500 c_iMSD[1] c_iMSD[2] c_iMSD[3] c_iMSD[4] file nafion.ion_diff mode scalar
+fix idiffAve all ave/time 500 1 500 c_iMSD[1] c_iMSD[2] c_iMSD[3] c_iMSD[4] file pre_nafion.ion_diff mode scalar
 
 #
 # Run
@@ -124,6 +117,35 @@ variable now equal time
 fix no_efld all nvt temp ${sys_temp} ${sys_temp} ${tdamp}
 run 500000 every 500000 "write_restart intermediate_nvt_time_${now}_fs.restart" 
 unfix no_efld
+
+#
+# Walls
+#
+
+change_box all x scale 1.01
+
+fix wallx0 sodium wall/lj93 xlo EDGE 0.1 1.0 ${cutoff} units box pbc yes 
+fix wallxF sodium wall/lj93 xhi EDGE 0.1 1.0 ${cutoff} units box pbc yes
+
+#
+# Data collection with electric field
+#
+
+# Atom information DUMP file for collection period
+undump lmp_dump
+dump lmp_dump all custom ${atom_step} ${project}.d id type x y z vx vy vz c_AtStr[1] c_AtStr[2] c_AtStr[3] c_AtStr[4] c_AtStr[5] c_AtStr[6]
+
+# RDFs
+unfix nrdfAve
+fix nrdfAve all ave/time 500 1 500 c_nrdf[*] file nafion.rdf mode vector
+
+# MSD 
+# Water
+unfix wdiffAve 
+fix wdiffAve all ave/time 500 1 500 c_wMSD[1] c_wMSD[2] c_wMSD[3] c_wMSD[4] file nafion.water_diff mode scalar
+# Ion
+unfix idiffAve
+fix idiffAve all ave/time 500 1 500 c_iMSD[1] c_iMSD[2] c_iMSD[3] c_iMSD[4] file nafion.ion_diff mode scalar
 
 # Second step: efield
 fix bulk_E all efield ${sys_efld} 0.0 0.0  

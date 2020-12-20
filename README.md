@@ -54,3 +54,13 @@ Here is a list of directories with their description - detailed descriptions are
 	- `construction` - the `DPD_tests` are tests for the code that postprocesses the output from `EMC` to make it a suitable input for our model in `LAMMPS`.
 	- `input_verification` - scripts used to check if the input for `LAMMPS` is valid   
 
+## Notes
+
+* When simulating the effects of the electric field, it is now recommended to 1) Place the walls only after the first NVT step without the electric field, and 2) Use a rescaling command to change the box dimensions rather than changing their absolute values. This is because if the sodium counterion is too close to the 
+wall it will experience a very high force that will launch it outside the simulation box, causing the simulation to crash. Example of a rescaling command can be found in `simulations/DPD_Efield/E1V_nm/seed_5/in.nafion_efield` and in most cases is 
+
+```bash
+change_box all x scale 1.01
+```
+Sometimes the scaling needs to increase slightly (e.g. to 1.02).
+

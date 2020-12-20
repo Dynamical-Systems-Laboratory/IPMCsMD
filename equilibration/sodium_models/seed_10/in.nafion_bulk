@@ -16,8 +16,8 @@ atom_style	full
 
 # Paths and file names
 variable	project		index	"nafion"						# project name
-variable	source		index	../../../../construction/constructed_setups/DPD_based/sodium_models/seed_10	# data directory
-variable	params		index	../../../../construction/constructed_setups/DPD_based/sodium_models/seed_10	# parameter directory
+variable	source		index	../../../construction/constructed_setups/DPD_based/sodium_models/seed_10	# data directory
+variable	params		index	../../../construction/constructed_setups/DPD_based/sodium_models/seed_10	# parameter directory
 variable 	data_file	index 	${params}/dpd.data 					# initial data file
 
 # System properties
@@ -31,7 +31,7 @@ variable	pdamp		index	100		# pressure damping
 variable	cutoff		index	10.0		# standard cutoff
 variable	charge_cutoff	index	10.0	# charge cutoff
 variable	precision	index	0.001		# kspace precision
-variable	vseed		index	470226	# velocity seed
+variable	vseed		index	534382	# velocity seed
 
 # Energy minimization settings
 variable 	etol       	index   0.0		# unitless stopping tolerance for energy
@@ -91,9 +91,7 @@ thermo_style 	custom step time density temp pe ke etotal press
 thermo		${dtthermo}
 
 # Run energy minimization - 0K (check) and 1 atm pressure
-#fix emin all box/relax iso 1.0  
 minimize ${etol} ${ftol} ${maxiter} ${maxeval}
-#unfix emin
 
 # Random initial velocity 
 velocity	all create ${sys_temp} ${vseed} &
@@ -159,7 +157,7 @@ write_restart	first_nvt.restart
 
 # With pre-data collection settings
 fix npt_1 all npt temp ${sys_temp} ${sys_temp} ${tdamp} &
-		  iso ${sys_press} ${sys_press} ${pdamp}
+		  aniso ${sys_press} ${sys_press} ${pdamp}
 run 4000000
 unfix npt_1
 
@@ -170,7 +168,7 @@ dump lmp_dump all custom ${atom_step} ${project}.d id type x y z
 
 # NPT and run
 fix npt_2 all npt temp ${sys_temp} ${sys_temp} ${tdamp} &
-		  iso ${sys_press} ${sys_press} ${pdamp}
+		  aniso ${sys_press} ${sys_press} ${pdamp}
 
 #
 # RDF and CN

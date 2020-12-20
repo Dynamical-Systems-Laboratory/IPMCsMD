@@ -15,7 +15,6 @@ A recommended path is to run it on a dedicated Linux server with a `screen` or u
 
 ## Postprocessing
 
-* Based on the time steps in `log.lammps` split every dataset into pre- and during electric field simulation part. This will be automated in the future.
 * Make sure a `post_processing` directory exists in each seed directory
 * On MacOs and Linux operating systems, run the `run_python_part.sh` 
 	- This will copy and execute all python scripts in the `post_processing` directory in the main directory (i.e. equilibration/sodium_models/)

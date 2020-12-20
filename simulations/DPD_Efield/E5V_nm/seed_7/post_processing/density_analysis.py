@@ -19,7 +19,7 @@ import io_module as io
 #
 
 # .d file from measurement period
-dfile = '../with_efield_nafion.d'
+dfile = '../efield_nafion.d'
 # .data file
 cwd = os.getcwd()
 seed_no = cwd.split('/')[-2]
