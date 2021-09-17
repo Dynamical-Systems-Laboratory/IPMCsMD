@@ -64,3 +64,9 @@ change_box all x scale 1.01
 ```
 Sometimes the scaling needs to increase slightly (e.g. to 1.02).
 
+## Citation
+
+If you find this software useful, consider citing
+
+*Truszkowska, A. and Porfiri, M., 2021. Molecular dynamics of ionic polymer-metal composites. Philosophical Transactions of the Royal Society A, 379(2208), p.20200408.*
+
